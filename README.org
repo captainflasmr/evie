@@ -1,0 +1,270 @@
+#+TITLE: EVIE - Emacs View-mode Improved Editing
+#+AUTHOR: Your Name
+#+EMAIL: your.email@example.com
+#+LANGUAGE: en
+#+OPTIONS: toc:2 num:nil
+#+STARTUP: overview
+
+* EVIE - Baby-Proof Your Emacs! 👶
+
+EVIE (Emacs View-mode Improved Editing) transforms Emacs' built-in =view-mode= into a powerful, ergonomic modal editing experience while protecting your precious files from accidental modifications. Perfect for parents who code with little ones around!
+
+[[file:assets/evie-demo.gif]]
+
+** Why EVIE?
+
+- 🛡️ *Baby-proof protection*: Files open in read-only mode by default
+- ⌨️ *Ergonomic navigation*: Single-key movement without modifiers
+- 🔄 *Best of both worlds*: Combines Emacs and Vim navigation patterns
+- 🎯 *Built-in foundation*: Uses Emacs' native =view-mode= as the base
+- 🚀 *Zero dependencies*: Works with vanilla Emacs 26.1+
+- 💡 *Smart integration*: Respects your existing workflows
+
+** Features
+
+*** Modal Editing Made Simple
+- Enter view-mode automatically when opening files
+- Quick toggle between view and edit modes
+- Visual feedback with cursor changes (box for view, bar for edit)
+
+*** Dual Navigation Systems
+*Emacs-style (familiar, modifier-free):*
+- =n/p= - next/previous line
+- =f/b= - forward/backward character  
+- =a/e= - beginning/end of line
+
+*Vim-style (efficient):*
+- =j/k/h/l= - navigation
+- =0/$= - beginning/end of line
+- =g/G= - beginning/end of buffer
+- =u/d= - scroll up/down
+
+*** Baby-Proofing Features
+- Emergency lockdown mode (=C-c C-l=) - instantly protect all buffers
+- Smart edit detection - automatically switches to edit mode when needed
+- Customizable excluded modes (dired, magit, etc.)
+- Mode-line indicator with baby emoji 👶
+
+** Installation
+
+*** Package Manager
+#+begin_src elisp
+;; Using straight.el
+(straight-use-package
+ '(evie :type git :host github :repo "yourusername/evie"))
+
+;; Using use-package with straight
+(use-package evie
+  :straight (:type git :host github :repo "yourusername/evie")
+  :config
+  (evie-mode 1))
+#+end_src
+
+*** Manual Installation
+1. Clone this repository:
+   #+begin_src bash
+   git clone https://github.com/yourusername/evie.git
+   #+end_src
+
+2. Add to your Emacs configuration:
+   #+begin_src elisp
+   (add-to-list 'load-path "/path/to/evie")
+   (require 'evie)
+   (evie-mode 1)
+   #+end_src
+
+** Quick Start
+
+*** Basic Usage
+1. Enable EVIE: =M-x evie-mode=
+2. Open any file - it automatically opens in view-mode
+3. Navigate with single keys: =j/k= or =n/p=
+4. Press =i= to enter edit mode when you need to make changes
+5. Press =C-<tab>= to return to view-mode
+
+*** Key Bindings
+
+**** View Mode Navigation
+| Key     | Function              | Style |
+|---------+-----------------------+-------|
+| =j/n=   | Next line             | Both  |
+| =k/p=   | Previous line         | Both  |
+| =h/b=   | Backward character    | Both  |
+| =l/f=   | Forward character     | Both  |
+| =0/a=   | Beginning of line     | Both  |
+| =$/e=   | End of line           | Both  |
+| =g=     | Beginning of buffer   | Vim   |
+| =G=     | End of buffer         | Vim   |
+| =u=     | Scroll up             | Vim   |
+| =d=     | Scroll down           | Vim   |
+| =;=     | Other window          | EVIE  |
+
+**** Mode Switching
+| Key           | Function                    |
+|---------------+-----------------------------|
+| =i=           | Enter edit mode             |
+| =C-<tab>=     | Enter view mode             |
+| =C-<escape>=  | Enter view mode             |
+| =C-c C-l=     | Emergency lockdown          |
+
+** Configuration
+
+*** Basic Configuration
+#+begin_src elisp
+(use-package evie
+  :config
+  ;; Enable EVIE globally
+  (evie-mode 1)
+  
+  ;; Customize behavior
+  (setq evie-auto-view-files t                    ; Auto-enable view-mode
+        evie-return-to-view-after-save t          ; Return to view after save
+        evie-visual-feedback t                    ; Change cursor type
+        evie-scroll-lines 3                       ; Lines to scroll with u/d
+        evie-mode-line-indicator " 👶"))          ; Mode line indicator
+#+end_src
+
+*** Advanced Configuration
+#+begin_src elisp
+(use-package evie
+  :config
+  (evie-mode 1)
+  
+  ;; Exclude additional modes from auto-view
+  (add-to-list 'evie-excluded-modes 'org-agenda-mode)
+  (add-to-list 'evie-excluded-modes 'calendar-mode)
+  
+  ;; Custom keybindings
+  (with-eval-after-load 'evie
+    (define-key view-mode-map (kbd "m") 'bookmark-set)
+    (define-key view-mode-map (kbd "'") 'bookmark-jump))
+  
+  ;; Disable auto-view for specific file types
+  (add-hook 'find-file-hook
+            (lambda ()
+              (when (string-match-p "\\.log\\'" (buffer-name))
+                (evie-enter-edit-mode)))))
+#+end_src
+
+** Customization Options
+
+All customization options can be set via =M-x customize-group RET evie= or programmatically:
+
+| Variable                         | Default    | Description                               |
+|----------------------------------+------------+-------------------------------------------|
+| =evie-auto-view-files=           | =t=        | Auto-enable view-mode for opened files   |
+| =evie-return-to-view-after-save= | =t=        | Return to view-mode after saving         |
+| =evie-visual-feedback=           | =t=        | Change cursor type for mode indication   |
+| =evie-scroll-lines=              | =3=        | Number of lines to scroll with u/d       |
+| =evie-mode-line-indicator=       | =" 👶"=    | Mode line indicator text                  |
+| =evie-excluded-modes=            | See below  | Major modes to exclude from auto-view    |
+
+*** Default Excluded Modes
+- =dired-mode=
+- =magit-mode=
+- =help-mode=
+- =apropos-mode=
+- =compilation-mode=
+- =package-menu-mode=
+
+** Common Workflows
+
+*** Reading Code
+1. Open file (automatically in view-mode)
+2. Navigate with =j/k/h/l= or =n/p/f/b=
+3. Jump between functions with =g/G=
+4. Use =;= to switch between split windows
+5. Press =i= only when you need to edit
+
+*** Baby-Proof Editing Session
+1. Enable emergency lockdown: =C-c C-l=
+2. All file buffers become read-only
+3. Continue your work safely
+4. Use =i= to edit specific files as needed
+
+*** Org-Mode Integration
+#+begin_src elisp
+;; Prevent conflicts with org-speed-commands
+(add-hook 'org-mode-hook
+          (lambda ()
+            (when (and (boundp 'org-use-speed-commands)
+                       org-use-speed-commands
+                       view-mode)
+              (evie-enter-edit-mode))))
+#+end_src
+
+** Troubleshooting
+
+*** Common Issues
+
+**** "Can't undo in view-mode"
+*Solution:* EVIE automatically switches to edit mode when undo commands are detected. If this doesn't work, press =i= before undoing.
+
+**** "Conflicts with org-speed-commands"
+*Solution:* Add the org-mode hook shown above, or disable auto-view for org files:
+#+begin_src elisp
+(add-to-list 'evie-excluded-modes 'org-mode)
+#+end_src
+
+**** "Files don't auto-open in view-mode"
+*Check:*
+- =evie-auto-view-files= is =t=
+- Current major mode isn't in =evie-excluded-modes=
+- File has a filename (not a temporary buffer)
+
+*** Debug Mode
+#+begin_src elisp
+;; Enable debug messages
+(setq evie-debug t)
+
+;; Check current state
+(evie-debug-info)
+#+end_src
+
+** Comparison with Other Modal Editing
+
+| Feature              | EVIE | Evil | Meow | Boon |
+|----------------------+------+------+------+------|
+| Built on Emacs core  | ✓    | ✗    | ✓    | ✓    |
+| Baby-proof protection| ✓    | ✗    | ✗    | ✗    |
+| Vim-style navigation | ✓    | ✓    | ✓    | ✗    |
+| Emacs-style fallback | ✓    | ✗    | ✗    | ✓    |
+| Zero dependencies    | ✓    | ✗    | ✗    | ✗    |
+| Visual feedback      | ✓    | ✓    | ✓    | ✓    |
+
+** Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch: =git checkout -b feature-name=
+3. Run tests: =make test=
+4. Submit a pull request
+
+*** Development Setup
+#+begin_src bash
+git clone https://github.com/yourusername/evie.git
+cd evie
+make install-deps  # Install development dependencies
+make test          # Run test suite
+#+end_src
+
+** License
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+** Acknowledgments
+
+- Inspired by the Reddit post on [[https://www.reddit.com/r/emacs/comments/fojc1y/using_viewmode_for_modal_navigation/][using view-mode for modal navigation]]
+- Built on Emacs' excellent =view-mode= foundation
+- Named after my daughter Evie, who inspired the baby-proofing features 👶
+
+** Support
+
+- 📧 Email: your.email@example.com
+- 🐛 Issues: [[https://github.com/yourusername/evie/issues]]
+- 💬 Discussions: [[https://github.com/yourusername/evie/discussions]]
+
+---
+
+*Happy coding, and may your files stay safe from tiny fingers!* 👶✨

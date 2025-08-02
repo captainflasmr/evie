@@ -1,0 +1,191 @@
+#+TITLE: EVIE Changelog
+#+AUTHOR: Your Name
+#+EMAIL: your.email@example.com
+#+LANGUAGE: en
+#+OPTIONS: toc:2 num:nil
+#+STARTUP: overview
+
+* EVIE Changelog
+
+All notable changes to the EVIE (Emacs View-mode Improved Editing) project will be documented in this file.
+
+The format is based on [[https://keepachangelog.com/en/1.0.0/][Keep a Changelog]], and this project adheres to [[https://semver.org/spec/v2.0.0.html][Semantic Versioning]].
+
+** [Unreleased]
+
+*** Added
+- Support for custom keybinding profiles
+- Integration with =which-key= for keybinding hints
+- Performance optimizations for large files
+- Smart detection of programming vs. text files
+
+*** Changed
+- Improved cursor feedback with color coding
+- Better integration with =org-speed-commands=
+
+*** Deprecated
+- =evie-legacy-keybindings= (will be removed in v1.0.0)
+
+*** Removed
+- None
+
+*** Fixed
+- None
+
+*** Security
+- None
+
+** [0.1.0] - 2025-08-02
+
+*** Added
+- 🎉 Initial release of EVIE
+- 🛡️ Baby-proof modal editing built on =view-mode=
+- ⌨️ Dual navigation system (Emacs + Vim keybindings)
+- 👶 Emergency lockdown mode for complete file protection
+- 🎯 Smart edit detection and automatic mode switching
+- 👁️ Visual feedback with cursor type changes
+- 📊 Mode-line indicator with baby emoji
+- ⚙️ Comprehensive customization options
+- 🔧 Integration with =view-read-only= for =C-x C-q= compatibility
+- 📝 Auto-return to view-mode after saving (configurable)
+- 🚫 Excluded modes list for better integration
+- 🖱️ Window management keybindings
+- 📜 Customizable scroll distances
+- 🔄 Global minor mode implementation
+
+*** Key Features in v0.1.0
+
+**** Navigation
+- =j/k/h/l= - Vim-style movement
+- =n/p/f/b/a/e= - Emacs-style movement (modifier-free)
+- =g/G= - Buffer beginning/end
+- =u/d= - Configurable page scrolling
+- =0/$= - Line beginning/end
+- =;= - Window switching
+
+**** Mode Management  
+- =i= - Enter edit mode
+- =C-<tab>= / =C-<escape>= - Enter view mode
+- =C-c C-l= - Emergency lockdown all buffers
+- Automatic view-mode on file open (configurable)
+- Return to view-mode after save (configurable)
+
+**** Baby-Proofing
+- Files open in read-only mode by default
+- Protection against accidental modifications
+- Emergency lockdown for all file buffers
+- Visual indicators for current mode
+- Smart handling of excluded major modes
+
+**** Customization
+- =evie-auto-view-files= - Control auto-activation
+- =evie-return-to-view-after-save= - Post-save behavior
+- =evie-visual-feedback= - Cursor type changes
+- =evie-scroll-lines= - Scroll distance
+- =evie-mode-line-indicator= - Mode line display
+- =evie-excluded-modes= - Modes to skip
+
+**** Integration
+- Respects existing Emacs workflows
+- Works with dired, magit, help modes
+- Compatible with org-mode (with considerations)
+- Integrates with standard Emacs keybindings
+- Preserves all normal view-mode functionality
+
+*** Technical Details
+- Minimum Emacs version: 26.1
+- Zero external dependencies
+- Lexical binding enabled
+- Proper package metadata and autoloads
+- Comprehensive customization group
+- Hook-based architecture for extensibility
+
+*** Documentation
+- Complete README with installation instructions
+- Customization guide with examples
+- Troubleshooting section
+- Comparison with other modal editing packages
+- Development and contribution guidelines
+
+** [0.0.1] - 2025-07-31 (Pre-release)
+
+*** Added
+- 🧪 Initial prototype and proof of concept
+- Basic view-mode enhancement with custom keybindings
+- Simple baby-proofing functionality
+- Core navigation improvements
+- Blog post documentation of the idea
+
+*** Technical Notes
+- Initial exploration of view-mode capabilities
+- Experimentation with keybinding combinations
+- Testing automatic file protection concepts
+- User feedback collection from blog post
+
+---
+
+** Version Naming Convention
+
+EVIE follows semantic versioning (MAJOR.MINOR.PATCH):
+
+- *MAJOR*: Incompatible API changes or major architectural changes
+- *MINOR*: New functionality in a backwards compatible manner
+- *PATCH*: Backwards compatible bug fixes
+
+** Release Notes Format
+
+Each release includes:
+- 📅 *Date*: Release date
+- 🎯 *Focus*: Main theme or goal of the release
+- ✨ *Added*: New features
+- 🔄 *Changed*: Changes in existing functionality  
+- 🗑️ *Deprecated*: Soon-to-be removed features
+- ❌ *Removed*: Removed features
+- 🐛 *Fixed*: Bug fixes
+- 🔒 *Security*: Security improvements
+
+** Future Roadmap
+
+*** v0.2.0 (Planned - Q4 2025)
+- Enhanced org-mode integration
+- Custom keybinding profiles
+- Better visual feedback options
+- Performance optimizations
+- Extended documentation
+
+*** v0.3.0 (Planned - Q1 2026)
+- Plugin system for extensions
+- Integration with popular packages (helm, ivy, etc.)
+- Advanced baby-proofing features
+- Mobile/touch device considerations
+
+*** v1.0.0 (Planned - Q2 2026)
+- Stable API
+- Complete feature set
+- Comprehensive test coverage
+- Production-ready status
+- Long-term support commitment
+
+** Migration Guides
+
+*** Upgrading from v0.0.1 to v0.1.0
+No breaking changes. Simply update your package and restart Emacs.
+
+** Support and Issues
+
+For version-specific issues:
+- Check the [[https://github.com/yourusername/evie/issues][GitHub Issues]]
+- Consult the [[file:README.org][README]] for troubleshooting
+- Join the [[https://github.com/yourusername/evie/discussions][community discussions]]
+
+** Contributors
+
+Thanks to all contributors who made EVIE possible:
+
+- Your Name - Initial work and concept
+- Community feedback from Reddit post discussion
+- Beta testers and early adopters
+
+---
+
+*Keep your Emacs baby-proof and your coding smooth!* 👶✨
