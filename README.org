@@ -7,6 +7,8 @@
 
 EVIE (Emacs View-mode Improved Editing) transforms Emacs' built-in =view-mode= into a powerful, ergonomic modal editing experience while protecting your precious files from accidental modifications. Perfect for parents who code with little ones around!
 
+Named after my daughter Evie, who inspired the baby-proofing features 👶
+
 #+attr_org: :width 300px
 #+attr_html: :width 100%
 [[file:img/evie-github-banner.jpg]]
@@ -171,6 +173,40 @@ All customization options can be set via =M-x customize-group RET evie= or progr
 - =apropos-mode=
 - =compilation-mode=
 - =package-menu-mode=
+
+* Bugs                                                                 :bugs:
+
+#+begin_src emacs-lisp :results table :exports results :tangle no
+(my/kanban-to-table "bugs" "issues")
+#+end_src
+
+#+RESULTS:
+| TODO                                                 |
+|------------------------------------------------------|
+| Sometimes a descrepancy with Evie-mode and read-only |
+
+** TODO Sometimes a descrepancy with Evie-mode and read-only
+
+** Issues
+
+Report issues on the [[https://github.com/captainflasmr/ollama-buddy/issues][GitHub Issues page]]
+
+* Roadmap                                                           :roadmap:
+
+#+begin_src emacs-lisp :results table :exports results :tangle no
+(my/kanban-to-table "roadmap" "issues")
+#+end_src
+
+#+RESULTS:
+| TODO                                                      |
+|-----------------------------------------------------------|
+| One handed mode, baby in one hand and Emacs in the other! |
+
+** TODO One handed mode, baby in one hand and Emacs in the other!
+
+* Issues
+
+Report issues on the [[https://github.com/captainflasmr/evie/issues][GitHub Issues page]]
 
 * Common Workflows
 
