@@ -2,12 +2,14 @@
 #+AUTHOR: James Dyer
 #+EMAIL: captainflasmr@gmail.com
 #+LANGUAGE: en
-#+OPTIONS: toc:2 num:nil
-#+STARTUP: overview
+#+options: ':t toc:nil author:nil email:nil num:nil title:nil
+#+startup: showall
 
 EVIE (Emacs View-mode Improved Editing) transforms Emacs' built-in =view-mode= into a powerful, ergonomic modal editing experience while protecting your precious files from accidental modifications. Perfect for parents who code with little ones around!
 
-[[file:assets/evie-demo.gif]]
+#+attr_org: :width 300px
+#+attr_html: :width 100%
+[[file:img/evie-github-banner.jpg]]
 
 * Why EVIE?
 
