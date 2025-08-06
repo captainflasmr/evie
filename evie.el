@@ -74,9 +74,8 @@
   :group 'evie)
 
 (defcustom evie-excluded-modes
-  '(dired-mode
+  '(
     magit-mode
-    help-mode
     apropos-mode
     compilation-mode
     package-menu-mode)
@@ -108,7 +107,17 @@
     (define-key view-mode-map (kbd "f") 'forward-char)
     (define-key view-mode-map (kbd "b") 'backward-char)
     (define-key view-mode-map (kbd "a") 'beginning-of-line)
+    (define-key view-mode-map (kbd "-") 'end-of-line)
     (define-key view-mode-map (kbd "e") 'end-of-line)
+    (define-key view-mode-map (kbd ",") 'beginning-of-buffer)
+    (define-key view-mode-map (kbd ".") 'end-of-buffer)
+    (define-key view-mode-map (kbd "y") 'kill-ring-save)
+    (define-key view-mode-map (kbd "i") 'evie-scroll-down)
+    (define-key view-mode-map (kbd "SPC") 'set-mark-command)
+    (define-key view-mode-map (kbd "[") 'tab-bar-switch-to-prev-tab)
+    (define-key view-mode-map (kbd "]") 'tab-bar-switch-to-next-tab)
+    (define-key view-mode-map (kbd "RET") 'eval-last-sexp)
+    (define-key view-mode-map (kbd "x") 'delete-char)
     
     ;; Vim-style navigation
     (define-key view-mode-map (kbd "j") 'next-line)
@@ -127,13 +136,14 @@
     (define-key view-mode-map (kbd "d") 'evie-scroll-down)
     
     ;; Mode switching
-    (define-key view-mode-map (kbd "i") 'evie-enter-edit-mode)
+    (define-key view-mode-map (kbd "o") 'evie-enter-edit-mode)
     
     ;; Window management
     (define-key view-mode-map (kbd ";") 'other-window)
     
     ;; Disable potentially problematic keys
-    (define-key view-mode-map (kbd "SPC") nil)
+    (define-key view-mode-map (kbd "DEL") nil)
+    ;; (define-key view-mode-map (kbd "SPC") nil)
     
     (setq evie--keybindings-applied t)))
 
@@ -205,12 +215,15 @@
 
 (defun evie--smart-edit-command-p (command)
   "Check if COMMAND should automatically switch to edit mode."
-  (memq command '(self-insert-command
+  (memq command '(kill-line
                   yank
+                  backward-delete-char-untabify
+                  c-electric-backspace
+                  backward-kill-word
+                  undo
                   delete-backward-char
                   delete-char
-                  newline
-                  indent-for-tab-command)))
+                  newline)))
 
 (defun evie--pre-command-hook ()
   "Pre-command hook to detect edit intentions."
@@ -256,6 +269,7 @@ modifications."
   ;; Global keybindings
   (global-set-key (kbd "C-<escape>") 'evie-enter-view-mode)
   (global-set-key (kbd "C-<tab>") 'evie-enter-view-mode)
+  (global-set-key (kbd "C-<backspace>") 'evie-enter-view-mode)
   (global-set-key (kbd "C-c C-l") 'evie--emergency-lockdown)
   
   (message "EVIE mode enabled - Your Emacs is now baby-proof!"))
@@ -276,7 +290,6 @@ modifications."
   (remove-hook 'pre-command-hook 'evie--pre-command-hook)
   
   ;; Remove global keybindings
-  (global-unset-key (kbd "C-<escape>"))
   (global-unset-key (kbd "C-<tab>"))
   (global-unset-key (kbd "C-c C-l"))
   
