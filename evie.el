@@ -74,11 +74,7 @@
   :group 'evie)
 
 (defcustom evie-excluded-modes
-  '(
-    magit-mode
-    apropos-mode
-    compilation-mode
-    package-menu-mode)
+  '()
   "Major modes where EVIE should not auto-enable view-mode."
   :type '(repeat symbol)
   :group 'evie)
@@ -111,14 +107,13 @@
     (define-key view-mode-map (kbd "e") 'end-of-line)
     (define-key view-mode-map (kbd ",") 'beginning-of-buffer)
     (define-key view-mode-map (kbd ".") 'end-of-buffer)
-    (define-key view-mode-map (kbd "y") 'kill-ring-save)
-    (define-key view-mode-map (kbd "i") 'evie-scroll-down)
-    (define-key view-mode-map (kbd "SPC") 'set-mark-command)
+    (define-key view-mode-map (kbd "y") 'evie-scroll-down)
+    (define-key view-mode-map (kbd "i") 'evie-enter-edit-mode)
+    (define-key view-mode-map (kbd "SPC") 'evie-scroll-down)
     (define-key view-mode-map (kbd "[") 'tab-bar-switch-to-prev-tab)
     (define-key view-mode-map (kbd "]") 'tab-bar-switch-to-next-tab)
-    (define-key view-mode-map (kbd "RET") 'eval-last-sexp)
     (define-key view-mode-map (kbd "x") 'delete-char)
-    
+    (define-key view-mode-map (kbd "v") 'View-scroll-page-forward)
     ;; Vim-style navigation
     (define-key view-mode-map (kbd "j") 'next-line)
     (define-key view-mode-map (kbd "k") 'previous-line)
@@ -220,6 +215,8 @@
                   backward-delete-char-untabify
                   c-electric-backspace
                   backward-kill-word
+                  indent-for-tab-command
+                  my/comment-or-uncomment
                   undo
                   delete-backward-char
                   delete-char
@@ -269,6 +266,7 @@ modifications."
   ;; Global keybindings
   (global-set-key (kbd "C-<escape>") 'evie-enter-view-mode)
   (global-set-key (kbd "C-<tab>") 'evie-enter-view-mode)
+  (global-set-key (kbd "C-<return>") 'evie-enter-view-mode)
   (global-set-key (kbd "C-<backspace>") 'evie-enter-view-mode)
   (global-set-key (kbd "C-c C-l") 'evie--emergency-lockdown)
   
